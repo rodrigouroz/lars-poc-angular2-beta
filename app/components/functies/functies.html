@@ -1,0 +1,7 @@
+<h1>
+  List of Functies
+  <a [routerLink]="['NewFunctie']" role="button" class="btn btn-default">
+    <span class="glyphicon glyphicon-plus"></span> New
+  </a>
+</h1>
+<grid [rows]="functies" [columns]="columns" (change)="edit($event)"></grid>
