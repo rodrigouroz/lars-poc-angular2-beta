@@ -10,30 +10,28 @@ import {ProgressIndicatorConnection, Actions} from '../../lib/progress-indicator
 })
 
 export class LoadingIndicator {
-    private show: boolean;
     private width: number;
     private timer: NodeJS.Timer;
     private requests: number;
     constructor() {
         this.requests = 0;
-        this.show = false;
         ProgressIndicatorConnection.pending.subscribe((action: Actions) => {
             if (action == Actions.START) {
+                if (this.requests == 0) {
+                    this.startAnimation();
+                }
                 this.requests++;    
             } else {
+                if (this.requests == 1) {
+                    this.stopAnimation();
+                }
                 this.requests--;
             }
             
-            this.show = this.requests > 0 && this.width > 0;
-            
-            if (this.requests > 0) {
-                // start timers
-                this.startAnimation();
-            } else {
-                // stop timers
-                this.stopAnimation();
-            }
         });
+    }
+    get show(): boolean {
+        return this.requests > 0 && this.width > 0;
     }
     get widthStyle(): string {
         return (this.width * 100) + '%';
@@ -45,30 +43,37 @@ export class LoadingIndicator {
     private stopAnimation() {
         clearTimeout(this.timer);
     }
+    private calculateIncrement(): number {
+        
+        let increment: number = 0;
+        let factor: number = 0;
+        let correction:number = 0;
+        
+        if (this.width >= 0.9) {
+            increment = 0.005;
+        } else {
+            
+            if (this.width >= 0 && this.width < 0.25) {
+                factor = 6;    
+            } else if (this.width >= 0.25 && this.width < 0.65) {
+                factor = 3;
+            } else if (this.width >= 0.65 && this.width < 0.9) {
+                factor = 2;
+            }
+            
+            // TODO: correct by number of pending requests and don't restart on each new request
+            
+            increment = (Math.random() * factor) / 100;
+        }
+
+        return increment;
+    }
     private increaseIndicator() {
         if (this.width >= 1 || this.requests == 0) {
             return;
         }
 
-        let rnd: number = 0;
-
-        if (this.width >= 0 && this.width < 0.25) {
-            // Start out between 3 - 6% increments
-            rnd = (Math.random() * (5 - 3 + 1) + 3) / 100;
-        } else if (this.width >= 0.25 && this.width < 0.65) {
-            // increment between 0 - 3%
-            rnd = (Math.random() * 3) / 100;
-        } else if (this.width >= 0.65 && this.width < 0.9) {
-            // increment between 0 - 2%
-            rnd = (Math.random() * 2) / 100;
-        } else if (this.width >= 0.9 && this.width < 0.99) {
-            // finally, increment it .5 %
-            rnd = 0.005;
-        } else {
-            // after 99%, don't increment:
-            rnd = 0;
-        }
-        this.width += rnd;
+        this.width += this.calculateIncrement();
         this.timer = setTimeout(() => this.increaseIndicator(), 250);
     }
 }
