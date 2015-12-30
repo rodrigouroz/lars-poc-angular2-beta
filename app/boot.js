@@ -27,6 +27,8 @@ System.register(['angular2/platform/browser', 'angular2/core', 'angular2/router'
                 progress_indicator_backend_1 = progress_indicator_backend_1_1;
             }],
         execute: function() {
+            // TODO: When there's a build process only run this in the bundled production file, not in dev
+            core_1.enableProdMode();
             browser_1.bootstrap(main_1.LarsComponent, [router_1.ROUTER_PROVIDERS, http_1.HTTP_PROVIDERS, core_1.provide(http_1.XHRBackend, { useClass: progress_indicator_backend_1.ProgressIndicatorBackend }), functies_1.Functies, personen_1.Personen]);
         }
     }
