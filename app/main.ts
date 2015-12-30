@@ -5,11 +5,12 @@ import {FunctieComponent} from './components/functies/functie';
 import {PersonenComponent} from './components/personen/personen';
 import {PersoonComponent} from './components/personen/persoon';
 import {HomeComponent} from './components/home/home';
+import {LoadingIndicator} from './components/loading-indicator/loading-indicator';
 
 @Component({
     selector: 'lars-app',
     templateUrl: 'app/main.html',
-    directives: [ROUTER_DIRECTIVES]
+    directives: [ROUTER_DIRECTIVES, LoadingIndicator]
 })
 @RouteConfig([
     { path: '/', component: HomeComponent, as: 'Home' },

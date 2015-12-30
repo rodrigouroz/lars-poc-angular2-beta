@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', './components/functies/functies', './components/functies/functie', './components/personen/personen', './components/personen/persoon', './components/home/home'], function(exports_1) {
+System.register(['angular2/core', 'angular2/router', './components/functies/functies', './components/functies/functie', './components/personen/personen', './components/personen/persoon', './components/home/home', './components/loading-indicator/loading-indicator'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,7 +8,7 @@ System.register(['angular2/core', 'angular2/router', './components/functies/func
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, functies_1, functie_1, personen_1, persoon_1, home_1;
+    var core_1, router_1, functies_1, functie_1, personen_1, persoon_1, home_1, loading_indicator_1;
     var LarsComponent;
     return {
         setters:[
@@ -32,6 +32,9 @@ System.register(['angular2/core', 'angular2/router', './components/functies/func
             },
             function (home_1_1) {
                 home_1 = home_1_1;
+            },
+            function (loading_indicator_1_1) {
+                loading_indicator_1 = loading_indicator_1_1;
             }],
         execute: function() {
             LarsComponent = (function () {
@@ -45,7 +48,7 @@ System.register(['angular2/core', 'angular2/router', './components/functies/func
                     core_1.Component({
                         selector: 'lars-app',
                         templateUrl: 'app/main.html',
-                        directives: [router_1.ROUTER_DIRECTIVES]
+                        directives: [router_1.ROUTER_DIRECTIVES, loading_indicator_1.LoadingIndicator]
                     }),
                     router_1.RouteConfig([
                         { path: '/', component: home_1.HomeComponent, as: 'Home' },
