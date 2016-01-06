@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', '../../services/personen', '../grid/grid', '../grid/column'], function(exports_1) {
+System.register(['angular2/core', 'angular2/router', '../../services/personen', '../grid/grid'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,7 +8,7 @@ System.register(['angular2/core', 'angular2/router', '../../services/personen', 
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, personen_1, grid_1, column_1;
+    var core_1, router_1, personen_1, grid_1;
     var PersonenComponent;
     return {
         setters:[
@@ -23,20 +23,18 @@ System.register(['angular2/core', 'angular2/router', '../../services/personen', 
             },
             function (grid_1_1) {
                 grid_1 = grid_1_1;
-            },
-            function (column_1_1) {
-                column_1 = column_1_1;
             }],
         execute: function() {
             PersonenComponent = (function () {
+                //columns: Array<Column>;
                 function PersonenComponent(router, service) {
                     var _this = this;
                     this.router = router;
                     this.service = service;
-                    this.columns = [
-                        new column_1.Column('firstname', 'First Name'),
-                        new column_1.Column('lastname', 'Last Name')
-                    ];
+                    /*this.columns = [
+                      new Column('firstname', 'First Name'),
+                      new Column('lastname', 'Last Name')
+                    ];*/
                     this.service.list()
                         .subscribe(function (res) { return _this.personen = res; });
                 }

@@ -8,5 +8,5 @@ import {Personen as PersonenService} from './services/personen';
 import {ProgressIndicatorBackend} from './lib/progress-indicator-backend';
 
 // TODO: When there's a build process only run this in the bundled production file, not in dev
-enableProdMode();
+//enableProdMode();
 bootstrap(LarsComponent, [ROUTER_PROVIDERS, HTTP_PROVIDERS, provide(XHRBackend, {useClass: ProgressIndicatorBackend}), FunctiesService, PersonenService]);

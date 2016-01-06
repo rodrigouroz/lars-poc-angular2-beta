@@ -5,6 +5,7 @@
     <title>LARS PoC UI Angular2 (beta)</title>
     
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="node_modules/fixed-data-table/dist/fixed-data-table.css">
     <link rel="stylesheet" href="styles.css">
 
     <!-- 1. Load libraries -->
@@ -19,13 +20,16 @@
     <!-- 2. Configure SystemJS -->
     <script>
       System.config({
+        map: {
+            'react': 'node_modules/react/dist/react.js',
+            'react-dom': 'node_modules/react-dom/dist/react-dom.js',
+            'node-uuid': 'node_modules/node-uuid/uuid.js',
+            'fixed-data-table': 'node_modules/fixed-data-table/dist/fixed-data-table.js'
+        },
         packages: {        
           app: {
             format: 'register',
-            defaultExtension: 'js',
-            map: {
-              'node-uuid': 'node_modules/node-uuid/uuid.js'
-            }
+            defaultExtension: 'js'
           }
         }
       });

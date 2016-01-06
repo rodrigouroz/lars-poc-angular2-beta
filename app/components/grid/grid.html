@@ -1,16 +1,2 @@
-<table class="table table-striped">
-  <tr>
-    <th></th>
-    <th *ngFor="#col of columns">
-      <a (click)="sort(col.name)">{{col.descr}}</a>
-    </th>
-  </tr>
-  <tr *ngFor="#row of rows">
-    <td>
-      <a (click)="edit(row)" class="btn btn-default" role="button">
-        <span class="glyphicon glyphicon-edit"></span>
-      </a>
-    </td>
-    <td *ngFor="#col of columns">{{row[col.name]}}</td>
-  </tr>
-</table>
+Facebook React Grid
+<div id="fixed-data-table"></div>

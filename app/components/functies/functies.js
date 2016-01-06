@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', '../../services/functies', '../grid/grid', '../grid/column'], function(exports_1) {
+System.register(['angular2/core', 'angular2/router', '../../services/functies', '../grid/grid'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,7 +8,7 @@ System.register(['angular2/core', 'angular2/router', '../../services/functies', 
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, functies_1, grid_1, column_1;
+    var core_1, router_1, functies_1, grid_1;
     var FunctiesComponent;
     return {
         setters:[
@@ -23,9 +23,6 @@ System.register(['angular2/core', 'angular2/router', '../../services/functies', 
             },
             function (grid_1_1) {
                 grid_1 = grid_1_1;
-            },
-            function (column_1_1) {
-                column_1 = column_1_1;
             }],
         execute: function() {
             FunctiesComponent = (function () {
@@ -34,8 +31,8 @@ System.register(['angular2/core', 'angular2/router', '../../services/functies', 
                     this.router = router;
                     this.service = service;
                     this.columns = [
-                        new column_1.Column('name', 'Name'),
-                        new column_1.Column('description', 'Description')
+                        { field: 'name', description: 'Name' },
+                        { field: 'description', description: 'Description' }
                     ];
                     this.service.list()
                         .subscribe(function (res) { return _this.functies = res; });

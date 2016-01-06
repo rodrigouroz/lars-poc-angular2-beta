@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/common', './sorter'], function(exports_1) {
+System.register(['angular2/core', './fixed-data-table-wrapper'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,36 +8,39 @@ System.register(['angular2/core', 'angular2/common', './sorter'], function(expor
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, common_1, sorter_1;
+    var core_1, fixed_data_table_wrapper_1;
     var Grid;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             },
-            function (common_1_1) {
-                common_1 = common_1_1;
-            },
-            function (sorter_1_1) {
-                sorter_1 = sorter_1_1;
+            function (fixed_data_table_wrapper_1_1) {
+                fixed_data_table_wrapper_1 = fixed_data_table_wrapper_1_1;
             }],
         execute: function() {
             Grid = (function () {
                 function Grid() {
                     this.change = new core_1.EventEmitter();
-                    this.sorter = new sorter_1.Sorter();
                 }
-                Grid.prototype.sort = function (key) {
-                    this.sorter.sort(key, this.rows);
+                Grid.prototype.edit = function (element) {
+                    this.change.emit(element);
                 };
-                Grid.prototype.edit = function (functie) {
-                    this.change.emit(functie);
+                Grid.prototype.ngOnChanges = function () {
+                    if (this.rows) {
+                        var table = new fixed_data_table_wrapper_1.FixedDataTableWrapper({
+                            width: 500,
+                            height: 500,
+                            rowHeight: 50,
+                            headerHeight: 50
+                        }, this.rows, this.columns);
+                        table.display('fixed-data-table');
+                    }
                 };
                 Grid = __decorate([
                     core_1.Component({
                         selector: 'grid',
                         templateUrl: 'app/components/grid/grid.html',
-                        directives: [common_1.NgFor],
                         inputs: ['rows: rows', 'columns: columns'],
                         outputs: ['change']
                     }), 

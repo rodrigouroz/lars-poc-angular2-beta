@@ -3,7 +3,7 @@ import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
 import {Functies as FunctiesService} from '../../services/functies';
 import {Functie} from '../../model/functie';
 import {Grid} from '../grid/grid';
-import {Column} from '../grid/column';
+import {DataColumn} from '../grid/data-column';
 
 @Component({
   selector: 'functies',
@@ -14,11 +14,11 @@ import {Column} from '../grid/column';
 
 export class FunctiesComponent {
   functies: Array<Functie>;
-  columns: Array<Column>;
+  columns: Array<DataColumn>;
   constructor(private router: Router, private service: FunctiesService) {
     this.columns = [
-      new Column('name', 'Name'),
-      new Column('description', 'Description')
+      {field: 'name', description: 'Name'},
+      {field: 'description', description: 'Description'}
     ];
     
     this.service.list()
