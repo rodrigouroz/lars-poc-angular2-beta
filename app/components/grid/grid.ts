@@ -1,4 +1,4 @@
-import {Component, View, EventEmitter, OnChanges} from 'angular2/core';
+import {Component, EventEmitter} from 'angular2/core';
 import {FixedDataTableWrapper} from './fixed-data-table-wrapper';
 import {DataColumn} from './data-column';
 
@@ -9,28 +9,44 @@ import {DataColumn} from './data-column';
   outputs: ['change']
 })
 
-export class Grid implements OnChanges {
+export class Grid {
 
   change: EventEmitter<any> = new EventEmitter();
 
   columns: Array<DataColumn>;
-  rows: Array<any>;
+  private _rows: Array<any>;
 
   edit(element) {
     this.change.emit(element);
   }
   
-  ngOnChanges() {
-      if (this.rows) {
+  get rows(): Array<any> {
+      return this._rows;
+  }
+  
+  tableWidth(): number {
+      let width: number = 0;
+      for (let i = 0; i < this.columns.length; i++) {
+          width += this.columns[i].width;
+      }
+      
+      return width;
+  }
+  
+  set rows(newRows: Array<any>) {
+      this._rows = newRows;
+      
+      if (this._rows) {
         let table: FixedDataTableWrapper = new FixedDataTableWrapper({
-            width: 500,
+            width: this.tableWidth(),
             height: 500,
             rowHeight: 50,
-            headerHeight: 50
-        }, this.rows, this.columns);
+            headerHeight: 50,
+            rowsCount: this._rows.length
+        }, this._rows, this.columns, this.edit.bind(this));
         
         table.display('fixed-data-table');    
       }
-      
   }
+
 }

@@ -3,6 +3,7 @@ import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
 import {Personen as PersonenService} from '../../services/personen';
 import {Persoon} from '../../model/persoon';
 import {Grid} from '../grid/grid';
+import {DataColumn} from '../grid/data-column';
 
 @Component({
   selector: 'personen',
@@ -13,12 +14,15 @@ import {Grid} from '../grid/grid';
 
 export class PersonenComponent {
   personen: Array<Persoon>;
-  //columns: Array<Column>;
+  columns: Array<DataColumn>;
   constructor(private router: Router, private service: PersonenService) {
-    /*this.columns = [
-      new Column('firstname', 'First Name'),
-      new Column('lastname', 'Last Name')
-    ];*/
+
+    this.columns = [
+      {field: 'firstname', description: 'First Name', width: 300},
+      {field: 'lastname', description: 'Last Name', width: 300},
+      {field: 'email', description: 'Email', width: 300}
+    ];
+    
     this.service.list()
       .subscribe(res => this.personen = res);
   }

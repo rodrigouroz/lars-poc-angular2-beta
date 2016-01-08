@@ -1,1 +1,1 @@
-{"version":3,"file":"data-column.js","sourceRoot":"","sources":["data-column.ts"],"names":["DataColumn","DataColumn.constructor"],"mappings":";;;;;YAAA;gBAAAA;gBAGAC,CAACA;gBAADD,iBAACA;YAADA,CAACA,AAHD,IAGC;YAHD,mCAGC,CAAA"}
+{"version":3,"file":"data-column.js","sourceRoot":"","sources":["data-column.ts"],"names":["DataColumn","DataColumn.constructor"],"mappings":";;;;;YAAA;gBAAAA;gBAIAC,CAACA;gBAADD,iBAACA;YAADA,CAACA,AAJD,IAIC;YAJD,mCAIC,CAAA"}

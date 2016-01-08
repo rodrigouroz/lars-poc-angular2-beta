@@ -17,8 +17,8 @@ export class FunctiesComponent {
   columns: Array<DataColumn>;
   constructor(private router: Router, private service: FunctiesService) {
     this.columns = [
-      {field: 'name', description: 'Name'},
-      {field: 'description', description: 'Description'}
+      {field: 'name', description: 'Name', width: 300},
+      {field: 'description', description: 'Description', width: 600}
     ];
     
     this.service.list()

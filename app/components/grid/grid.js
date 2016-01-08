@@ -26,16 +26,32 @@ System.register(['angular2/core', './fixed-data-table-wrapper'], function(export
                 Grid.prototype.edit = function (element) {
                     this.change.emit(element);
                 };
-                Grid.prototype.ngOnChanges = function () {
-                    if (this.rows) {
-                        var table = new fixed_data_table_wrapper_1.FixedDataTableWrapper({
-                            width: 500,
-                            height: 500,
-                            rowHeight: 50,
-                            headerHeight: 50
-                        }, this.rows, this.columns);
-                        table.display('fixed-data-table');
+                Object.defineProperty(Grid.prototype, "rows", {
+                    get: function () {
+                        return this._rows;
+                    },
+                    set: function (newRows) {
+                        this._rows = newRows;
+                        if (this._rows) {
+                            var table = new fixed_data_table_wrapper_1.FixedDataTableWrapper({
+                                width: this.tableWidth(),
+                                height: 500,
+                                rowHeight: 50,
+                                headerHeight: 50,
+                                rowsCount: this._rows.length
+                            }, this._rows, this.columns, this.edit.bind(this));
+                            table.display('fixed-data-table');
+                        }
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
+                Grid.prototype.tableWidth = function () {
+                    var width = 0;
+                    for (var i = 0; i < this.columns.length; i++) {
+                        width += this.columns[i].width;
                     }
+                    return width;
                 };
                 Grid = __decorate([
                     core_1.Component({

@@ -5,7 +5,7 @@ System.register(['react', 'react-dom', 'fixed-data-table'], function(exports_1) 
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
     var React, ReactDOM, fixed_data_table_1;
-    var CellProps, TextCell, TableProps, FixedDataTableWrapper;
+    var CellProps, TextCell, FixedDataTableWrapper;
     return {
         setters:[
             function (React_1) {
@@ -29,28 +29,32 @@ System.register(['react', 'react-dom', 'fixed-data-table'], function(exports_1) 
                     _super.call(this, props);
                 }
                 TextCell.prototype.render = function () {
-                    return (React.createElement(fixed_data_table_1.Cell, null, this.props.data[this.props.rowIndex][this.props.field]));
+                    return (React.createElement(fixed_data_table_1.Cell, null, this.props.data[this.props.field]));
                 };
                 return TextCell;
             })(React.Component);
-            TableProps = (function () {
-                function TableProps() {
-                }
-                return TableProps;
-            })();
             FixedDataTableWrapper = (function (_super) {
                 __extends(FixedDataTableWrapper, _super);
-                function FixedDataTableWrapper(props, rows, columns) {
+                function FixedDataTableWrapper(props, rows, columns, objectChanged) {
                     _super.call(this, props);
                     this.rows = rows;
                     this.columns = columns;
+                    this.objectChanged = objectChanged;
                 }
                 FixedDataTableWrapper.prototype.render = function () {
                     var _this = this;
-                    return React.createElement(fixed_data_table_1.Table, {"rowHeight": this.props.rowHeight, "rowsCount": this.rows.length, "width": this.columns.length * 200, "height": this.props.height, "headerHeight": this.props.headerHeight}, React.createElement(fixed_data_table_1.Column, {"header": React.createElement(fixed_data_table_1.Cell, null, "Name"), "cell": function (props) { return (React.createElement(TextCell, {"data": _this.rows, "field": "name", "rowIndex": props.rowIndex})); }, "width": 200}), React.createElement(fixed_data_table_1.Column, {"header": React.createElement(fixed_data_table_1.Cell, null, "Description"), "cell": function (props) { return (React.createElement(TextCell, {"data": _this.rows, "field": "description", "rowIndex": props.rowIndex})); }, "width": 200}));
+                    return React.createElement(fixed_data_table_1.Table, {"rowHeight": this.props.rowHeight, "rowsCount": this.props.rowsCount, "width": this.props.width, "maxHeight": this.props.height, "headerHeight": this.props.headerHeight, "onRowClick": this.rowClicked.bind(this), "rowClassNameGetter": this.rowClassNameGetter}, this.columns.map(function (column, index) {
+                        return React.createElement(fixed_data_table_1.Column, {"key": index, "header": React.createElement(fixed_data_table_1.Cell, null, column.description), "cell": function (props) { return (React.createElement(TextCell, {"data": _this.rows[props.rowIndex], "field": column.field})); }, "width": column.width});
+                    }));
                 };
                 FixedDataTableWrapper.prototype.display = function (where) {
                     ReactDOM.render(this.render(), document.getElementById(where));
+                };
+                FixedDataTableWrapper.prototype.rowClassNameGetter = function () {
+                    return "clickable";
+                };
+                FixedDataTableWrapper.prototype.rowClicked = function (event, index) {
+                    this.objectChanged(this.rows[index]);
                 };
                 return FixedDataTableWrapper;
             })(React.Component);

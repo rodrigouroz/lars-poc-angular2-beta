@@ -206,7 +206,7 @@ declare module FixedDataTable {
         /**
           * Callback that is called when a row is clicked.
           */
-        onRowClick?: (index: number) => void;
+        onRowClick?: (event, index: number) => void;
         
         /**
           * Callback that is called when a row is double clicked.

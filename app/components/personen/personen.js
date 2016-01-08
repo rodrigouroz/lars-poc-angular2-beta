@@ -26,15 +26,15 @@ System.register(['angular2/core', 'angular2/router', '../../services/personen', 
             }],
         execute: function() {
             PersonenComponent = (function () {
-                //columns: Array<Column>;
                 function PersonenComponent(router, service) {
                     var _this = this;
                     this.router = router;
                     this.service = service;
-                    /*this.columns = [
-                      new Column('firstname', 'First Name'),
-                      new Column('lastname', 'Last Name')
-                    ];*/
+                    this.columns = [
+                        { field: 'firstname', description: 'First Name', width: 300 },
+                        { field: 'lastname', description: 'Last Name', width: 300 },
+                        { field: 'email', description: 'Email', width: 300 }
+                    ];
                     this.service.list()
                         .subscribe(function (res) { return _this.personen = res; });
                 }

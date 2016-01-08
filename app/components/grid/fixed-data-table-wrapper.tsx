@@ -1,12 +1,11 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import {Table, Column, Cell} from 'fixed-data-table';
+import {Table, Column, Cell, TableProps} from 'fixed-data-table';
 import {DataColumn} from './data-column';
 
 class CellProps {
     public field: string;
     public data: any;
-    public rowIndex: number;
 }
 
 class TextCell extends React.Component<CellProps, any> {
@@ -18,55 +17,50 @@ class TextCell extends React.Component<CellProps, any> {
   render() {
     return (
       <Cell>
-        {this.props.data[this.props.rowIndex][this.props.field]}
+        {this.props.data[this.props.field]}
       </Cell>
     );
   }
 }
 
-class TableProps {
-    public width: number;
-    public height: number;
-    public rowHeight: number;
-    public headerHeight: number;
-}
-
 export class FixedDataTableWrapper extends React.Component<TableProps, any> {
-    constructor(props: TableProps, public rows: Array<any>, public columns: Array<DataColumn>) {
+    constructor(props: TableProps, public rows: Array<any>, public columns: Array<DataColumn>, private objectChanged: Function) {
         super(props);
     }
     render() {
+        
         return  <Table
                     rowHeight={this.props.rowHeight}
-                    rowsCount={this.rows.length}
-                    width={this.columns.length * 200}
-                    height={this.props.height}
-                    headerHeight={this.props.headerHeight}>
-                        <Column
-                            header={<Cell>Name</Cell>}
-                            cell={props => (
-                                <TextCell
-                                    data={this.rows}
-                                    field="name"
-                                    rowIndex={props.rowIndex}
-                                />
-                            )}
-                            width={200}
-                        />
-                        <Column
-                            header={<Cell>Description</Cell>}
-                            cell={props => (
-                                <TextCell
-                                    data={this.rows}
-                                    field="description"
-                                    rowIndex={props.rowIndex}
-                                />
-                            )}
-                            width={200}
-                        />
+                    rowsCount={this.props.rowsCount}
+                    width={this.props.width}
+                    maxHeight={this.props.height}
+                    headerHeight={this.props.headerHeight}
+                    onRowClick={this.rowClicked.bind(this)}
+                    rowClassNameGetter={this.rowClassNameGetter}>
+                        {this.columns.map ((column: DataColumn, index: number) => {
+                            return <Column
+                                key={index}
+                                header={<Cell>{column.description}</Cell>}
+                                cell={props => (
+                                    <TextCell
+                                        data={this.rows[props.rowIndex]}
+                                        field={column.field}
+                                    />
+                                )}
+                                width={column.width}
+                            />
+                        })}
                 </Table>;
     }
     display(where) {
         ReactDOM.render(this.render(), document.getElementById(where));
+    }
+    
+    rowClassNameGetter() {
+        return "clickable";
+    }
+    
+    rowClicked(event, index: number) {
+        this.objectChanged(this.rows[index]);
     }
 }

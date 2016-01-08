@@ -31,8 +31,8 @@ System.register(['angular2/core', 'angular2/router', '../../services/functies', 
                     this.router = router;
                     this.service = service;
                     this.columns = [
-                        { field: 'name', description: 'Name' },
-                        { field: 'description', description: 'Description' }
+                        { field: 'name', description: 'Name', width: 300 },
+                        { field: 'description', description: 'Description', width: 600 }
                     ];
                     this.service.list()
                         .subscribe(function (res) { return _this.functies = res; });
