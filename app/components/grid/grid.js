@@ -58,7 +58,8 @@ System.register(['angular2/core', './fixed-data-table-wrapper'], function(export
                         selector: 'grid',
                         templateUrl: 'app/components/grid/grid.html',
                         inputs: ['rows: rows', 'columns: columns'],
-                        outputs: ['change']
+                        outputs: ['change'],
+                        changeDetection: core_1.ChangeDetectionStrategy.OnPush
                     }), 
                     __metadata('design:paramtypes', [])
                 ], Grid);

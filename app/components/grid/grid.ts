@@ -1,4 +1,4 @@
-import {Component, EventEmitter} from 'angular2/core';
+import {Component, EventEmitter, ChangeDetectionStrategy} from 'angular2/core';
 import {FixedDataTableWrapper} from './fixed-data-table-wrapper';
 import {DataColumn} from './data-column';
 
@@ -6,7 +6,8 @@ import {DataColumn} from './data-column';
   selector: 'grid',
   templateUrl: 'app/components/grid/grid.html',
   inputs: ['rows: rows', 'columns: columns'],
-  outputs: ['change']
+  outputs: ['change'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class Grid {
