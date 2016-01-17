@@ -11,7 +11,7 @@
   },
   "files": [
     "typings/node-uuid-cjs.d.ts",
-    "app/main.ts",
-    "app/boot.ts"   
+    "src/app/main.ts",
+    "src/boot.ts"   
   ]
 }
