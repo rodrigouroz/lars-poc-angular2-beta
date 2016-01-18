@@ -8,21 +8,22 @@ import * as uuid from 'node-uuid';
 @Component({
   selector: 'persoon',
   viewProviders: [PersonenService],
-  templateUrl: 'app/components/personen/persoon.html',
+  templateUrl: '/assets/views/persoon.html',
   directives: [ROUTER_DIRECTIVES]
 })
 
 export class PersoonComponent {
   persoon: Persoon;
   new: boolean;
-  constructor(private service: PersonenService, private params: RouteParams, private router: Router) {
+  constructor(private service: PersonenService, private params: RouteParams,
+    private router: Router) {
     let key: string = params.get('key');
     if (key) {
       this.new = false;
       this.service.get(key)
         .subscribe(res => {
           this.persoon = res;
-          this.persoon.birthdate = this.persoon.birthdate.substring(0,10);
+          this.persoon.birthdate = this.persoon.birthdate.substring(0, 10);
         });
     } else {
       this.new = true;

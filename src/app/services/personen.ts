@@ -13,7 +13,7 @@ export class Personen {
 
   public list() : any {
     return this.http.get(this.url)
-      .map((res:Response) => res.json())
+      .map((res: Response) => res.json())
       .map((personen: any) => {
         let results: Array<Persoon> = [];
         let persoon: Persoon;
@@ -30,12 +30,12 @@ export class Personen {
           });
         }
         return results;
-      })
+      });
   }
 
   public get(key: string): any {
     return this.http.get(this.url + '/' + key)
-      .map((res:Response) => res.json());
+      .map((res: Response) => res.json());
   }
 
   public save(persoon: Persoon) {

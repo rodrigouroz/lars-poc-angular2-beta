@@ -8,7 +8,7 @@ import {Column} from '../grid/column';
 @Component({
   selector: 'functies',
   viewProviders: [FunctiesService],
-  templateUrl: 'app/components/functies/functies.html',
+  templateUrl: '/assets/views/functies.html',
   directives: [Grid, ROUTER_DIRECTIVES]
 })
 
@@ -20,11 +20,11 @@ export class FunctiesComponent {
       new Column('name', 'Name'),
       new Column('description', 'Description')
     ];
-    
+
     this.service.list()
       .subscribe(res => this.functies = res);
   }
-  
+
   edit(functie) {
     this.router.navigate(['/EditFunctie', {key: functie.key}]);
   }

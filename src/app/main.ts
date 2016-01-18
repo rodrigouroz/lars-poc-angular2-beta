@@ -1,5 +1,5 @@
 import {Component} from 'angular2/core';
-import {RouteConfig, ROUTER_DIRECTIVES, Location} from 'angular2/router'
+import {RouteConfig, ROUTER_DIRECTIVES, Location} from 'angular2/router';
 import {FunctiesComponent} from './components/functies/functies';
 import {FunctieComponent} from './components/functies/functie';
 import {PersonenComponent} from './components/personen/personen';
@@ -7,9 +7,11 @@ import {PersoonComponent} from './components/personen/persoon';
 import {HomeComponent} from './components/home/home';
 import {LoadingIndicator} from './components/loading-indicator/loading-indicator';
 
+import '../assets/styles/styles.css';
+
 @Component({
     selector: 'lars-app',
-    templateUrl: 'app/main.html',
+    templateUrl: '/assets/views/main.html',
     directives: [ROUTER_DIRECTIVES, LoadingIndicator]
 })
 @RouteConfig([

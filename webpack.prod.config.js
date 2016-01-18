@@ -39,7 +39,7 @@ module.exports = {
 
   entry: {
     'vendor':'./src/vendor.ts',
-    'main':'./src/boot.ts' // our angular app
+    'boot':'./src/boot.ts' // our angular app
   },
 
   // Config for our build files
@@ -53,7 +53,7 @@ module.exports = {
   resolve: {
     cache: false,
     // ensure loader extensions match
-    extensions: ['','.ts','.js','.json','.css','.html']
+    extensions: ['','.ts','.js','.json','.css','.html',  /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/, /\.ttf(\?v=\d+\.\d+\.\d+)?$/, /\.eot(\?v=\d+\.\d+\.\d+)?$/, /\.svg(\?v=\d+\.\d+\.\d+)?$/]
   },
 
   module: {
@@ -91,10 +91,16 @@ module.exports = {
       { test: /\.json$/,  loader: 'json-loader' },
 
       // Support for CSS as raw text
-      { test: /\.css$/,   loader: 'raw-loader' },
+      { test: /\.css$/,   loader: 'style!css' },
 
       // support for .html as raw text
-      { test: /\.html$/,  loader: 'raw-loader' }
+      { test: /\.html$/,  loader: 'raw-loader' },
+      
+      // bootstrap
+      {test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/font-woff'},
+      {test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/octet-stream'},
+      {test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file'},
+      {test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=image/svg+xml'}
 
       // if you add a loader include the file extension
     ]
@@ -114,7 +120,8 @@ module.exports = {
       {
         from: 'src/assets',
         to: 'assets'
-      }
+      },
+      {from: 'src/index.js'}
     ]),
     // generating html
     new HtmlWebpackPlugin({

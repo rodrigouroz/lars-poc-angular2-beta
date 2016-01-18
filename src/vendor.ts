@@ -31,6 +31,6 @@ import 'rxjs';
 import 'node-uuid';
 
 // Bootstrap
-import 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.css';
 
 // Other vendors for example jQuery, Lodash, angular2-jwt

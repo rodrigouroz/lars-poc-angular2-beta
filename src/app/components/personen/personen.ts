@@ -8,7 +8,7 @@ import {Column} from '../grid/column';
 @Component({
   selector: 'personen',
   viewProviders: [PersonenService],
-  templateUrl: 'app/components/personen/personen.html',
+  templateUrl: '/assets/views/personen.html',
   directives: [Grid, ROUTER_DIRECTIVES]
 })
 
@@ -23,7 +23,7 @@ export class PersonenComponent {
     this.service.list()
       .subscribe(res => this.personen = res);
   }
-  
+
   edit(persoon) {
     this.router.navigate(['/EditPersoon', {key: persoon.key}]);
   }

@@ -1,14 +1,19 @@
-import {ConnectionBackend, Connection, Request, Response, ReadyState, XHRConnection, BrowserXhr, ResponseOptions} from 'angular2/http';
+import {ConnectionBackend, Connection, Request, Response, ReadyState, XHRConnection, BrowserXhr,
+    ResponseOptions} from 'angular2/http';
 import {Injectable} from 'angular2/core';
 import {Observable} from 'rxjs/Observable';
 
 export enum Actions {START, STOP};
 
 export class ProgressIndicatorConnection implements Connection {
-    private baseConnection: XHRConnection;
+
+    static pending: Observable<Actions> =
+        new Observable (observer => ProgressIndicatorConnection.observer = observer);
+
     private static observer;
-    static pending: Observable<Actions> = new Observable (observer => ProgressIndicatorConnection.observer = observer);
-    
+
+    private baseConnection: XHRConnection;
+
     constructor(req: Request, browserXHR: BrowserXhr, baseResponseOptions?: ResponseOptions) {
         this.baseConnection = new XHRConnection(req, browserXHR, baseResponseOptions);
         ProgressIndicatorConnection.observer.next(Actions.START);
@@ -16,7 +21,7 @@ export class ProgressIndicatorConnection implements Connection {
            ProgressIndicatorConnection.observer.next(Actions.STOP);
         });
     }
-    
+
     get readyState(): ReadyState {
         return this.baseConnection.readyState;
     }
@@ -26,7 +31,7 @@ export class ProgressIndicatorConnection implements Connection {
     get response(): Observable<Response> {
         return this.baseConnection.response;
     }
-    
+
 }
 
 @Injectable()

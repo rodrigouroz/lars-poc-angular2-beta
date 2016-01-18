@@ -8,14 +8,15 @@ import * as uuid from 'node-uuid';
 @Component({
   selector: 'functie',
   viewProviders: [FunctiesService],
-  templateUrl: 'app/components/functies/functie.html',
+  templateUrl: '/assets/views/functie.html',
   directives: [ROUTER_DIRECTIVES]
 })
 
 export class FunctieComponent {
   functie: Functie;
   new: boolean;
-  constructor(private service: FunctiesService, private params: RouteParams, private router: Router) {
+  constructor(private service: FunctiesService, private params: RouteParams,
+    private router: Router) {
     let key: string = params.get('key');
     if (key) {
       this.new = false;

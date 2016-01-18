@@ -11,8 +11,7 @@ export class Sorter {
 
     if (this.key === key) {
       this.direction = -this.direction;
-    }
-    else {
+    } else {
       this.direction = 1;
     }
 
@@ -21,11 +20,9 @@ export class Sorter {
     data.sort((a, b) => {
       if (a[key] === b[key]) {
         return 0;
-      }
-      else if (a[key] > b[key]) {
+      } else if (a[key] > b[key]) {
         return this.direction;
-      }
-      else {
+      } else {
         return -this.direction;
       }
     });

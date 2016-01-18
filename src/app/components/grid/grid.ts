@@ -5,7 +5,7 @@ import {Sorter} from './sorter';
 
 @Component({
   selector: 'grid',
-  templateUrl: 'app/components/grid/grid.html',
+  templateUrl: '/assets/views/grid.html',
   directives: [NgFor],
   inputs: ['rows: rows', 'columns: columns'],
   outputs: ['change']
