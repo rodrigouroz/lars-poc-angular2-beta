@@ -1,0 +1,37 @@
+<div *ngIf="persoon" class="container">
+  <h1>Persoon:
+    {{persoon.name}}</h1>
+  <form #hf="ngForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="registrationnumber">Registration number</label>
+      <input #registrationnumber="ngForm" [(ngModel)]="persoon.registrationnumber" class="form-control" ngControl="registrationnumber" required type="numeric">
+      <div [hidden]="registrationnumber.valid || !registrationnumber.touched" class="alert alert-danger">
+        Registration number is required
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="firstname">First Name</label>
+      <input [(ngModel)]="persoon.firstname" class="form-control" type="text">
+    </div>
+    <div class="form-group">
+      <label for="lastname">Last Name</label>
+      <input [(ngModel)]="persoon.lastname" class="form-control" type="text">
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input [(ngModel)]="persoon.email" class="form-control" type="email">
+    </div>
+    <div class="form-group">
+      <label for="birthdate">Birthdate</label>
+      <input [(ngModel)]="persoon.birthdate" class="form-control" type="date">
+    </div>
+    <div class="row">
+      <div class="col-xs-6 text-left">
+        <a [routerLink]="['Personen']" role="button" class="btn btn-default">Cancel</a>
+      </div>
+      <div class="col-xs-6 text-right">
+        <button [disabled]="!hf.form.valid" class="btn btn-default" type="submit">Submit</button>
+      </div>
+    </div>
+  </form>
+</div>

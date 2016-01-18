@@ -1,0 +1,7 @@
+<h1>
+  List of Personen
+  <a [routerLink]="['NewPersoon']" role="button" class="btn btn-default">
+    <span class="glyphicon glyphicon-plus"></span> New
+  </a>
+</h1>
+<grid [rows]="personen" [columns]="columns" (change)="edit($event)"></grid>

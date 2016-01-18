@@ -16,7 +16,7 @@
     "build:prod": "./node_modules/.bin/webpack --config webpack.prod.config.js --progress --profile --colors --display-error-details --display-cached",
     "server:dev": "./node_modules/.bin/webpack-dev-server --progress --profile --colors --display-error-details --display-cached",
     "server:prod": "node dist/index.js",
-    "start": "npm run build:prod && npm run server:prod"
+    "start": "npm run server:prod"
   },
   "license": "UNLICENSED",
   "dependencies": {
